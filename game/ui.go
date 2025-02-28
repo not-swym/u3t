@@ -129,10 +129,13 @@ func updateGame(ui *UIState) {
 
 		// Is move in active board, or any board if active board is -1
 		if ui.Game.ActiveBoard == -1 || ui.Game.ActiveBoard == ui.HoveredBoard {
-			// Convert to bit position to check if cell is empty
-			bitPos := GetGlobalPosition(ui.HoveredBoard, ui.HoveredPosition)
-			if ui.Game.IsEmpty(bitPos) {
-				validMove = true
+			// Check if the board is not already won
+			if !ui.Game.IsBoardWon(ui.HoveredBoard) {
+				// Convert to bit position to check if cell is empty
+				bitPos := GetGlobalPosition(ui.HoveredBoard, ui.HoveredPosition)
+				if ui.Game.IsEmpty(bitPos) {
+					validMove = true
+				}
 			}
 		}
 
